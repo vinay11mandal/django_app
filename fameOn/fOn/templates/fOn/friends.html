@@ -1,0 +1,24 @@
+{% extends 'fOn/base.html' %}
+{% load staticfiles %}
+{% block prof %}
+{{profilefname | capfirst}} {{profilelname | capfirst}}
+{% endblock %}
+{% block content1%}
+<ul class = "nav nav-pills nav-stacked">
+  <li class = "active">
+  <a href = "profile">
+      <i class = "fa fa-user">Profile</i>
+  </a>
+  </li>
+  <li class = "active">
+  <a href = "friends">
+      <i class = "fa fa-users">Friends</i>
+  </a>
+  </li>
+  <li class = "active">
+  <a href = "photos">
+      <i class = "fa fa-file-image-o">Photos</i>
+  </a>
+  </li>
+</ul >
+{% endblock %}

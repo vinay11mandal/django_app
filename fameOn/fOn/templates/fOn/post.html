@@ -1,0 +1,79 @@
+{% load static%}
+
+<div class = "mycolor postpanel shadow">
+                    <div  class = " post heading">
+                        <div>
+                              <span class = "glyphicon glyphicon-remove"></span>
+                            </a>
+                        </div>
+                      <div  class = "pill-left meta">
+                      </div>
+                      <div class = "title h5">
+                        <a class = "post-user-name" ></a>
+                        <h5 id = "postname" class = "postname profile-name"></h5>
+                      </div>
+                      <div id="results"></div>
+                      <h6 class = "text-muted-time"></h6>
+                    </div>
+                    <div calss = "post-description">
+                      <h5 class = "mycolor"></h5>
+                        <div class = " stats">
+                            <button id = "likes{{post.id}}" class = "likebutton " data-catid = "{{post.id}}" type = "button" href = "#">
+                                <span class = "glyphicon glyphicon-thumbs-up"></span>
+                            </button>
+                            <p class="like "></p>
+                            <button id = "unlikes{{post.id}}" class = "unlikebutton " data-catid = "{{post.id}}" type = "button" href = "#">
+                                <span class = "glyphicon glyphicon-thumbs-down"></span>
+                            </button>
+                            
+                            <a class = "stat-item" href = "#">
+                                <i class = "fa fa-retweet icon"></i>
+                            </a>
+                        </div>
+                	</div>           
+</div>
+<!-- 
+<div class = "panel panel-white postpanel shadow">
+	<div	class = "post heading">
+		<div	class = "pill-left meta">
+		</div>
+		<div class = "title h5">
+			<a class = "post-user-name" ></a>Posted
+		</div>
+		<h6 class = "text-muted-time">{{}}</h6>
+	</div>
+	<div class = "post-description">
+		<h5>Like and commment</h5>
+		<div class = "stats">
+			<a class = "stat-item" href = "#">
+				<i class = "fa fa-thambs-up icon"></i>{{}}
+			</a>
+			<a class = "stat-item" href = "#">
+				<i class = "fa fa-retweet icon"></i>{{}}
+			</a>
+		</div>
+
+	</div>
+	<div class = "post-footer">
+		<div>
+			<input class="form-control add-comment-input" placeholder="Add a comment..." type = "text">
+			<ul class = "comment-list">
+				<li class = "comment">
+					<a class = "pull-left" href = "#">
+						<img class = "avtar" src = ""></img>
+					</a>
+					<div class= "comment-body">
+						<div class = "comment-heading">
+							<h4 class = "comment-user-name">
+								<a href = "#"></a>
+							</h4>
+							<h5 class = "time"></h5>
+						</div>
+						<p>my comments, {{}}</p>
+					</div>
+				</li>	
+			</ul>
+		</div>	
+	</div>
+	
+</div> -->

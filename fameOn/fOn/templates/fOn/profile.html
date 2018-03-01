@@ -1,0 +1,107 @@
+
+{% extends 'fOn/base.html' %}	
+{% load static %}
+{% load material_form %}
+{% include 'material/includes/material_css.html' %}
+{% include 'material/includes/material_js.html' %}
+<!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+{% block prof %}
+{{user.first_name | capfirst}} {{user.last_name | capfirst}}
+{% endblock %}
+{% block content1%}
+
+<ul class = "nav nav-pills nav-stacked">
+  <li class = "active">
+  <a href = "profile">
+      <i class = "fa fa-user">Profile</i>
+  </a>
+  </li>
+  <li class = "active">
+  <a href = "friends">
+      <i class = "fa fa-users">Friends</i>
+  </a>
+  </li>
+  <li class = "active">
+  <a href = "photos">
+      <i class = "fa fa-file-image-o">Photos</i>
+  </a>
+  </li>
+  <li class = "active">
+  <a href = "#">
+      <i class = "fa fa-file-image-o">Edit Profile</i>
+  </a>
+  </li>
+</ul >
+{% endblock %}
+{% block content%}
+<div class = "post-bar">
+	<div class="card-block">
+	    <div class="text-center">
+	        <h3 class = "head-name">Personal Details</h3>
+	    <form action = "fOn/editprofile/" method = "POST">
+	    </div>
+	    	<div>
+				<table class="table table-inverse">
+					<tbody>
+					    <tr>
+					      <th scope="row"><h4 class = "profile-name">First Name:</h4></th>
+					      	<td>
+						    	<h4 class = "profile-name">
+						      		{{request.user.first_name}}
+						      	</h4>
+						    </td>
+					    </tr>
+					    <tr>
+					      <th scope="row"><h4 class = "profile-name">Last Name:</h4></th>
+					      	<td>
+						    	<h4 class = "profile-name">
+						      		{{request.user.last_name}}
+						      	</h4>
+						    </td>
+					    </tr>
+					    <tr>
+					      <th scope="row"><h4 class = "profile-name">Title:</h4></th>
+					      	<td>
+						    	<h4 class = "profile-name">
+						      		{{request.user.userdetail.title}}
+						      	</h4>
+						    </td>
+					    </tr>
+					    <tr>
+					      <th scope="row"><h4 class = "profile-name">Gender:</h4></th>
+					      	<td>
+						    	<h4 class = "profile-name">
+						      		{{request.user.userdetail.gender}}
+						      	</h4>
+						    </td>
+					    </tr>
+					    <tr>
+					      <th scope="row"><h4 class = "profile-name">Phone:</h4></th>
+					      	<td>
+						    	<h4 class = "profile-name">
+						      		{{request.user.userdetail.mobile}}
+						      	</h4>
+						    </td>
+					    </tr>
+					    <tr>
+					      <th scope="row"><h4 class = "profile-name">Email:</h4></th>
+					      	<td>
+						    	<h4 class = "profile-name">
+						      		{{request.user.email}}
+						      	</h4>
+						    </td>
+					    </tr>
+					</tbody>
+				</table>
+			</div>	
+		    <div class="text-center">
+		        <button type = 'submit' class="btn btn-deep-purple">Edit Profile</button>
+		    </div>
+		</form>
+	</div>
+</div>
+{% endblock %}

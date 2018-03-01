@@ -1,0 +1,762 @@
+{% extends 'fOn/base.html' %}
+ 
+{% load staticfiles %}
+{% block image %}
+
+<div class="cont-profile text-center">
+   <div class="user-profile-img">
+		<a href="" >
+			<img src="{{user.profilepicture.profile_picture.url}}" class='img-responsive profile-image user'>
+			</a>
+			<!-- {{request.user.profilepicture_set.all.15.profile_picture.url}} -->
+       <div class="middle">
+           <form name="profile-picture" id = "prof-image" action="" method="POST" enctype="multipart/form-data" class="profile-class-image">
+           {% csrf_token %}
+            <input type="file" name="mypicture" class="text">
+            <span class="glyphicon glyphicon-camera"></span>
+           </form>
+       </div>
+    
+   </div>
+</div>
+     
+{% endblock image %}
+{% block prof %}
+{{user.first_name | capfirst}} {{user.last_name | capfirst}}
+<!-- <button type="button" class="upload-image" data-toggle="modal" data-target="#myModal">upload image</button> -->
+
+<!-- <div class = "modal fade" id = "myModal" role="dialog">
+	<div class = "modal-dialog">
+		<div class = "modal-content">
+		<div class = "modal-header">
+		  <button type = "button" class="close" data-dismiss = "modal">&times;</button>
+		  <h4 class = "modal-title">Upload image</h4>
+		</div>
+		<div class = "modal-body">
+			<form class="container" id="form1" enctype="multipart/form-data" method="POST" action="upload_image">{% csrf_token %}
+				<div class="row setup-content" id="step-1">
+					<div class="col-xs-6">
+						<div class="col-md-6 well text-center">
+							<label for="fileToUpload">Select a File to Upload</label><br />
+							<input type="file" name="fileToUpload" id="fileToUpload" onchange=""/>
+						</div>
+						<div id="fileName"></div>
+						<div id="fileSize"></div>
+						<div id="fileType"></div>
+							<div id="progressNumber"></div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button id = "form1"  type="submit" class = "btn btn-default submit-data add_b add_a">Save</button>
+				</div>  
+			</form>   
+		</div>
+
+	</div>
+</div> -->
+
+<div class = "modal fade" id = "personal-information" role="dialog">
+	<div class = "modal-dialog">
+		<div class = "modal-content">
+		<div class = "modal-header">
+		  <button type = "button" class="close" data-dismiss = "modal">&times;</button>
+		  <h4 class = "modal-title">Personal Information</h4>
+		</div>
+		<div class = "modal-body">
+			<form class="container" id="personal-form" method="POST" action="">{% csrf_token %}
+				<div class= "col-md-6"> 
+				 <div class="grid " >
+			        <div class="grid__item large--one-half no-pd">
+			          <div class="form-group">
+			            <label for="first_name" >First Name</label>
+			            <input type="text" class="form-control" id="first_name" name="first_name" placeholder="First Name">
+			          	<input type="hidden" id="hidden_id" />
+			          </div>
+			          <span class="messageContainer"></span>
+			           
+			        </div>
+			        <div class="grid__item large--one-half">
+			          <div class="form-group">
+			            <label for="last_name">Last Name</label>
+			            <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Last Name">
+			          </div>
+			          <span class="messageContainer"></span>
+			           
+			        </div>
+			      </div>
+			      <div class="grid__item large--one-half">
+			          <div class="form-group">
+			            <label for="title">Title</label>
+			            <select class="form-control title" id="title" placeholder="title" name= "title">
+			            	<option value="" selected>----</option>
+			            	<option value="Mr">Mr.</option>
+			            	<option value="Mrs">Mrs.</option>
+			            	<option value="Miss">Miss.</option>
+			            </select>
+			          </div>
+			          <span class="messageContainer"></span>   
+			    </div>
+			      <div class="grid">
+			        <div class="grid__item large--one-half no-pd">
+			          <div class="form-group">
+			            <label for="email">Email</label>
+			            <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+			          </div>
+			          <span class="messageContainer"></span>
+			           
+			        </div>
+			        
+			        <div class="grid__item large--one-half">
+			          <div class="form-group">
+			            <label for="gender">Gender</label>
+			            <select class="form-control gender" id="gender" placeholder="gender" name ="gender">
+			            	<option value="" selected>----</option>
+			            	<option value="M">Male</option>
+			            	<option value="F">Female</option>
+			            </select>
+			          </div>
+			          <span class="messageContainer"></span>
+			          
+			    	</div>
+			        
+			        <div class="grid__item large--one-half">
+			          <div class="form-group">
+			            <label for="phone">Phone</label>
+			            <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone">
+			          </div>
+			          <span class="messageContainer"></span> 
+			        </div>
+			         
+				<div class="modal-footer">
+					<button id = ""  type="submit" class = "btn btn-default submit-data add_b add_a">Submit</button>
+				</div>
+			</div>	  
+			</form>  
+		</div>
+
+	</div>
+</div>
+
+{% endblock %}
+
+{% block content1%}
+<ul class="nav nav-pills nav-stacked">
+	<li class="active">
+		<a>
+			 <button type="button" class="btn btn-info btn-lg btn-block personal-info" data-toggle="modal" data-target="#personal-information">Profile</button>
+		</a>
+	</li>
+	<li class="active">
+		<a href="friends">
+			<button type="button" class=" btn btn-info btn-lg btn-block">Friends</button>
+		</a>
+	</li>
+	<li class="active">
+		<a href="home">
+			<button type="button" class=" btn btn-info btn-lg btn-block">Photos</button>
+		</a>
+	</li>
+</ul >
+{% endblock %}
+
+{% block content%}
+<div class="profile-info  animated fadeInUp">
+	<div class="panel">
+		<form id="postformid" class="post-form" action ="" method="POST">
+			{% csrf_token %}
+			<textarea cols="60" id="post-text" maxlength="254" name="body" placeholder="Write your post..." rows="3" required=""></textarea>
+			<button type="submit" class="pull-right">Post</button>
+		</form>
+	</div> 
+	<div class="post">
+		<div class="newpost"></div>
+	</div>
+</div>
+<div>
+	<h1 class="post-date"></h1>
+</div>
+{% endblock %}
+
+{% block postcontent%}
+	<div class="post">
+		<div class="display-post"></div>
+	</div>
+{% endblock %}
+ 
+{% block javascript %}
+
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.js"></script>
+    <!-- Awesomplete -->
+ 
+ <!--  <script src="/static/js/easy-autocomplete.js" async></script> -->
+<script src="/static/js/autocomplete.js" async></script>
+<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js" ></script>
+<script type = "text/javascript">
+//Show all the posts on the page load
+$(document).ready(function(){
+	current_obj = $(this);
+	$.ajax({
+		type:"GET",
+		url:"/fOn/show_posts/",
+		data:{},
+		success: function(json){
+		$.each(json.post, function(key, value){
+
+			html_str = '<div class = "mycolor postpanel shadow" data-postdel="'+value.id+'">\
+				<div  class = "post heading">\
+					<div>\
+						<h4 class="profile-name likeunlike">Post</h4>\
+						<button class="delpost pull-right" data-delid="'+value.id+'">\
+						<span class="glyphicon glyphicon-remove"></span>\
+						</button>\
+					</div>\
+					<div class="title h5">\
+						<h5 class="profile-name">'+value.user_posted+'</h5>\
+					</div>\
+					<h6 class="text-muted-time">'+value.created+'</h6>\
+				</div>\
+				<div calss="post-description">\
+					<h5 class="mycolor">Post :'+value.body+'</h5>\
+					<div class="stats">\
+						<button id="likes'+value.id+'" class="likebutton" data-catid="'+value.id+'" type="button" href="#">\
+							<span class="glyphicon glyphicon-thumbs-up"></span>\
+						</button>\
+						<p class="like likeunlike">'+value.like+'</p>\
+						<button id="unlike'+value.id+'" class="unlikebutton likeunlike" data-catid="'+value.id+'" type="button" href="#">\
+							<span class="glyphicon glyphicon-thumbs-down"></span>\
+						</button>\
+					</div>\
+				</div>\
+				<div class="post-footer">\
+						<div class = "add-comment-first">\
+						<button class="display-comment" id= "display-commentid" data-dcomment='+value.id+'><h5 class="profile-name" type="submit">Comments</h5></button>\
+						</div>\
+				</div>';
+			$('div.display-post').append(html_str);
+			});
+		}
+	});
+});
+
+//create a post
+$('#postformid').on('submit', function(event){
+	event.preventDefault();
+	create_post();
+});
+
+function create_post() {
+	$.ajax({
+		url : "/fOn/create_post/",
+		type : "POST",
+		data : {'post' : $('#post-text').val(),},
+		success : function(response){
+			$('#post-text').val('');
+			html_str = 			'<div class = "mycolor postpanel shadow" data-postdel="'+response.post_id+'">\
+				<div  class = "post heading">\
+					<div>\
+						<h4 class="profile-name likeunlike">Post</h4>\
+						<button class="delpost pull-right" data-delid="'+response.post_id+'">\
+							<span class="glyphicon glyphicon-remove"></span>\
+						</button>\
+					</div>\
+					<div class="title h5">\
+						<h5 class="profile-name">'+response.author+'</h5>\
+					</div>\
+				  <h6 class="text-muted-time">'+response.publish+'</h6>\
+				</div>\
+				<div calss="post-description">\
+					<h5 class="mycolor">Post : '+response.post+'</h5>\
+					<div class="stats">\
+						<button id="likes'+response.post_id+'" class="likebutton" data-catid="'+response.post_id+'" type="button" href="#">\
+							<span class="glyphicon glyphicon-thumbs-up"></span>\
+						</button>\
+						<p class="like likeunlike"></p>\
+						<button id="unlike'+response.post_id+'" class="unlikebutton likeunlike" data-catid="'+response.post_id+'" type="button" href="#">\
+							<span class="glyphicon glyphicon-thumbs-down"></span>\
+						</button>';
+					
+				html_str +=	'</div>\
+					 <div class="post-footer">\
+							<div class = "add-comment-first">\
+								<button class="display-comment" id= "display-commentid" data-dcomment='+response.post_id+' type="submit"><h5 class="profile-name">Comments</h5>\
+								</button>\
+							</div>\
+					</div>\
+			</div>';
+
+			$('div.newpost').append(html_str);
+		},
+	});
+};
+
+
+//shows all the comments and input box
+$(document).on('click','.display-comment', function(){
+	var catid;
+	current_obj = $(this);
+	catid = $(this).attr('data-dcomment');
+	$.ajax({
+		url: "/fOn/show_comments/",
+		type: "POST",
+		data: {post_id:catid,},
+		success: function(response){
+			current_obj.parent('.add-comment-first').append('\
+					<div>\
+						<p>\
+						<input class="form-control add-comment-input" placeholder="Add a comment..." type="text" required=""></p>\
+						<div class="latest-comment-on">\
+							<button class="comment_submit btn btn-primary" type="submit" data-postid='+response.post_id+'>Submit</button>\
+						</div>\
+					</div>');
+			$.each(response.comment, function(key, value){
+				current_obj.parents('div.post-footer').append('\
+				<div>\
+					<li class="comment">\
+						<div>\
+							<button class="delcomment pull-right" data-delid="'+value.comment_id+'">\
+								<span class="glyphicon glyphicon-remove"></span>\
+							</button>\
+						</div>\
+						<a class="pull-left likeunlike" href="#">\
+							<img class="avtar" src =""></img>\
+						</a>\
+						<div class="comment-heading likeunlike">\
+							<h5 class="comment-user-name profile-name likeunlike">'+value.user_commented+'<a href="#"></a><h6 class="likeunlike">: commented on, </h6>\
+							</h5>\
+							<h5 class="time likeunlike">'+value.created_date+'</h5>\
+							<p>'+value.text+'</p>\
+						</div>\
+					</li>\
+				</div>');
+			});
+		}
+	});
+})
+
+//create a comment
+$(document).on('click', '.comment_submit', function(){
+	current_obj = $(this);
+	var catid;
+	catid = $(this).attr('data-postid');
+	var value=$.trim($(".add-comment-input").val());
+	if (value.length>0){
+		$('#display-commentid').hide();
+		execute_further();
+	}
+	function execute_further(){
+		$.ajax({
+			type:"POST",
+			url:'/fOn/comment/',
+			data:{comment: $('.add-comment-input').val(), post: catid,},
+			success: function(response){
+				$('.add-comment-input').val('');
+				current_obj.parent('.latest-comment-on').append(
+					'<li class="comment" id='+response.comment_id+'>\
+						<div>\
+							<button class="delcomment pull-right" data-delid="'+response.comment_id+'">\
+								<span class="glyphicon glyphicon-remove"></span>\
+							</button>\
+						</div>\
+						<a class="pull-left likeunlike" href="#">\
+							<img class="avtar" src =""></img>\
+						</a>\
+						<div class="comment-heading likeunlike">\
+							<h5 class="comment-user-name profile-name likeunlike">'+response.usercomment+'<a href="#"></a><h6 class="likeunlike">: commented on, </h6>\
+							</h5>\
+							<h5 class="time likeunlike">'+response.comment_date+'</h5>\
+							<p>'+response.comment_text+'</p>\
+						</div>\
+					</li>');
+			}
+		});
+	}
+
+});
+
+//Unlike on post
+$(document).on('click', '.likebutton', function(){
+	var catid;
+	current_obj = $(this);
+	catid = $(this).attr("data-catid");
+	$.ajax({
+		type:"GET",
+		url: '/fOn/likepost/',
+		data:{ post_id: catid },
+		success: function(response){
+			// $('#likes'+ catid).remove();
+			current_obj.parent().find('p.like').text(response.likes_count)
+		}
+	})
+});
+
+// Like on post
+$(document).on('click', '.unlikebutton', function(){
+	var catid;
+	current_obj = $(this);
+	catid = $(this).attr("data-catid");
+		$.ajax({
+			type:"GET",
+			url:'/fOn/unlikepost/',
+			data:{ post_id: catid },
+			success: function(response){
+				// $('unlikes'+ catid).remove();
+				current_obj.parent().find('p.like').text(response.likes_count)
+			}
+		})
+});
+
+//Delete a post
+$(document).on('click', '.delpost', function(){
+	var catid;
+	current_obj = $(this);
+	catid = $(this).attr("data-delid");
+		$.ajax(
+		  {
+			type:"GET",
+			url:"/fOn/delete_post/",
+			data:{ post_id: catid },
+			success: function(response) {
+				current_obj.parents('.mycolor').fadeOut();
+			},
+			error: function(response) {
+				alert("Couldn't remove item");
+			}
+		})
+});
+
+//Delete a comment
+$(document).on('click', '.delcomment', function(e){
+	delid = $(this).attr('data-delid');
+	current_obj = $(this);
+	$.ajax({
+		type:"GET",
+		url:"/fOn/delete_comment/",
+		data:{comment_id: delid,},
+		success: function(response){
+		current_obj.parents('.comment').fadeOut();        
+		},
+		error: function(e){
+			alert("Couldn't remove the comment");
+		}
+	});
+});
+
+//Search bar
+$(document).ready(function(){
+	$("input#srch-term").keyup(function(){
+		var query = $(this).val();
+		if(query.length>2){
+			$.ajax({
+				type: "POST",
+				url: "/fOn/get_user_detail/",
+				data: {'search_text': $('#srch-term').val(),},
+				success: searchSuccess,
+				dataType:'html'
+			});
+		}
+	});
+	$("#srch-term").val('');
+});
+
+function searchSuccess(data, textStatus, jqXHR)
+{
+	$('#search-results-id').html(data);
+}
+
+
+//Search using autocomplete
+$(document).ready(function(){
+	 
+		var input_search = $(this).val();
+		 
+			console.log($(this).val());
+		    $( "#search-auto" ).autocomplete({
+			    source: function( request, response ) {
+			        $.ajax( {
+			          type : "POST",
+			          url: "/fOn/search/",
+			          dataType: "json",
+			          data: {
+			            'search_text': input_search
+			          },
+			        	success: function( data ) {
+			          		console.log(data.name);
+			            	response($.map(data, function (item) {
+			            		     
+                    			return {
+                        				id : "search-auto",
+                        				value: item.name,
+                       					label: item.name
+                    				};
+                				}));
+			          	},
+			        });
+			    },
+		      	minLength: 2,
+		      	// select: function( event, ui ) {
+		       //  	log( "Selected: " + ui.name.value + " aka " + ui.name.id );
+		      	// }
+		    });
+ 
+});
+
+//Search bar easyautocomplete===== but is not working properly for our ajax response 
+// $(document).ready(function(){
+// 	$("input#search-auto").keyup(function(){
+// 		var query = $(this).val();
+// 		console.log(query);
+// 		if(query.length > 2){
+// 			console.log("hi");
+// 			$.ajax({
+// 				type: "POST",
+// 				url: "/fOn/search/",
+// 				data: {'search_text': $('#search-auto').val(),},
+// 				success: function(response){
+// 					console.log(JSON.stringify(response));
+// 					var options = {
+//   						data: JSON.stringify(response),
+  						
+//   						// getValue: "name",
+//   				// 		listLocation: "name",
+
+// 						// matchResponseProperty: "name",
+
+//   						list: {	
+//     						match: {
+//       							enabled: true
+//     						}
+//   						},
+
+//   						theme: "square"
+// 					};
+
+// 					$("#search-auto").easyAutocomplete(options);
+
+// 					},
+// 			});
+// 		}
+// 	});
+// 	$("#search-auto").val('');
+// });
+
+
+// Image uploading
+$(document).ready(function(){
+	$("input[type='file']").change(function(){
+		alert('Image should be in jpeg format');
+        readURL(this);
+    });
+    function readURL(input) {
+        $("#prof-image").submit();
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('.img-responsive').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $('#prof-image').ajaxForm({
+            url:"/fOn/upload_image/",
+            type: 'POST',
+            dataType: 'json',
+            clearForm: false,
+            resetForm: false,
+             
+            success: function(result) {
+                
+            },
+            error: function(result){
+                
+            },
+        });
+});
+
+//image submit through modelform
+
+// $('#form1').on('submit', function(e) {
+//     e.preventDefault();
+//     // data = new FormData($('form').get(0));
+//     if (this.files && this.files[0]) {
+//           var reader = new FileReader();
+//           reader.onload = function (e) {
+//               $('.img-responsive').attr('src', e.target.result);
+//           }
+          
+//     reader.readAsDataURL(this.files[0]);
+// 	}
+//     alert(' hi');
+//     $.ajax({
+//        	url : "/fOn/upload_image/",
+//         	type: "POST",
+//         	data: data,
+//         	contentType:false,
+//     		processData:false,
+//     		cache:false,
+//     		dataType:"json"
+//         	success: function (data) {
+//         	alert('success');
+       
+//         },  
+//     })
+// });
+
+// image send on onchange using base64/////////////////////
+// $(document).ready(function(){
+// 	 $("input[type='file']").change(function(){
+//        if (this.files && this.files[0]) {
+//           var reader = new FileReader();
+//           reader.onload = function (e) {
+//               $('.img-responsive').attr('src', e.target.result);
+               
+//               var data = {'img' : e.target.result}
+//                $.ajax({
+//                    type: "POST",
+//                    url: '/fOn/upload_image/',
+//                    data: data,
+//                    // {'img' : e.target.result},
+//                    // cache: false,
+//                    // processData: false,
+//                    // contentType: "application/json; charset=utf-8",
+//                    success: function(response){
+//                        alert(response.message);
+//                    },
+//                    error: function(rs, e){
+//                        alert("Error");
+
+//                },
+//            });
+//           }
+//           reader.readAsDataURL(this.files[0])
+//           // var form = $('form')[0];
+//           // var data = new FormData(form);
+//           // var formData = new FormData(this);
+//        }          
+//    });
+// });
+
+//Personal Information
+
+$(document).on('click','.personal-info',function(e){
+    e.preventDefault();
+    $("#personal-info").css('display','block');
+    $("label.error").css('display','block');
+    
+    $.ajax({
+      url: "/fOn/personal_information/",
+      type: 'POST',
+      data: 'json',
+      success: function (result) {
+        $("#first_name").val(result.first_name);
+        $("#last_name").val(result.last_name);
+        $("#title").val(result.title);
+        $("#gender").val(result.gender);
+        $("#email").val(result.email);
+        $("#phone").val(result.phone);
+
+        $("#select_title option").each(function() {
+          if($(this).text() == result.title) {
+            $(this).attr('selected', 'selected'); 
+            $(this).trigger("change");
+          }
+        });
+   
+        //For run this after completing current ajax
+        $(document).ajaxSuccess(function() {
+          $("#title option").each(function() {
+            if($(this).text() == result.title) {
+              $(this).attr('selected', 'selected');
+            }
+          });
+        });
+        $("#hidden_id").val(result.id);       
+      },beforeSend: function() {
+        $('.loader').css('display', 'block');
+      },complete: function(){
+        $('.loader').css('display', 'none');
+      },error: function (error) {
+        sweetAlert("Oops...", "Something went wrong...Please try again later!", "error");
+      }
+    });
+});
+
+// Save personal information
+
+$('#personal-form').on('submit', function(e){
+	e.preventDefault();
+	var obj = {};
+	obj["first_name"] = $("#first_name").val();
+	obj["last_name"] = $("#last_name").val();
+	obj["title"] = $("#title").val();
+	obj["email"] = $("#email").val();
+	obj["gender"] = $("#gender").val();
+	obj["mobile"] = $("#phone").val();
+	$.ajax({
+		url:"/fOn/edit_personal_info/",
+		type: "POST",
+		data: JSON.stringify(obj),
+		success: function(response){
+			alert('edited');
+		},
+	});	
+});
+
+$('#personal-form').validate({
+    errorElement: 'span',
+    rules: {
+        first_name: {
+            required: true,
+        },
+        last_name: {
+            required: true,
+        },
+        email: {
+            required: true,
+            pattern: "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:[A-Z]{2}|com|org|net|edu|gov|mil|biz|info|mobi|name|aero|asia|jobs|museum|in)"
+        },
+        title: {
+            required: true,
+            minlength: 1
+        },
+        gender: {
+            required: false,
+        },
+        phone: {
+            required: true,
+            minlength: 10
+        },
+    },
+    messages: {
+        first_name: {
+            required: "Please enter first name",
+        },
+        last_name: {
+            required: "Please enter last name",
+        },
+        email: {
+            required: "Please enter email",
+            pattern: "Please enter a valid email address"
+        },
+        title: {
+    
+            required: "Please enter title"
+        },
+        gender: {
+            required: "Please enter gender"
+        },
+        phone: {
+            required: "Please enter phone number"
+        },
+    }
+});
+
+</script>
+{% endblock %}
+
+ 
+
+
+ 
+ 
