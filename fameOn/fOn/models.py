@@ -26,7 +26,7 @@ class UserDetail(models.Model):
 	last_name = models.CharField(max_length=100)
 	title = models.CharField(max_length = 3, choices = TITLE_CHOICES,)
 	gender = models.CharField(max_length = 1, choices = GENDER_CHOICES,)
-	mobile = models.IntegerField()
+	mobile = models.IntegerField(null=True, blank=True)
 	email = models.EmailField(max_length = 254)
 	user = models.OneToOneField(User, null=True, blank=True, on_delete = models.CASCADE)
 	friends = models.ManyToManyField('self')

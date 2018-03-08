@@ -172,8 +172,6 @@ def get_user_detail(request):
 
 @csrf_exempt
 def search(request):
-    # import pdb
-    # pdb.set_trace()
     if request.method == 'POST':
         q = request.POST['search_text']
     else:
@@ -189,8 +187,6 @@ def search(request):
     #     search_list.append(data.copy())
     # data = {"name": list(search_list)}
     data = json.dumps(list(name))
-    import pdb 
-    pdb.set_trace()
     return HttpResponse(json.dumps(data), content_type="application/json")
 
 @login_required
@@ -240,11 +236,8 @@ def upload_image(request):
 
 # @csrf_exempt
 # def upload_image(request):
-#   # import pdb
-#   # pdb.set_trace()
 #   if request.method == 'POST':
-#       import pdb
-#       pdb.set_trace()
+
 #       form =  ProfilePicForm(request.POST or None, request.FILES or None)
 #       # handle_uploaded_file(request.FILES['profile_picture'])
 #       if form.is_valid():
@@ -267,9 +260,7 @@ def upload_image(request):
 #     if request.method == "POST":
 #         image = decode_base64_file(img)
         
-#         ProfileImage.objects.create(user = request.user, profile_picture=image)
-#         import pdb
-#         pdb.set_trace()         
+#         ProfileImage.objects.create(user = request.user, profile_picture=image)       
 #         data = {"message": "image saved sucessfully"}
 #         return HttpResponse(json.dumps(data), content_type='application/json')
 #     return HttpResponse(json.dumps(data), content_type='application/json') 

@@ -1,0 +1,6 @@
+
+User-agent: *
+
+Disallow: /404.html?page=
+Sitemap: http://localhost:8000/sitemap.xml
+
