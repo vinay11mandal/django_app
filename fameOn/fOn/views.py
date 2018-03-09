@@ -265,7 +265,7 @@ def upload_image(request):
 #         return HttpResponse(json.dumps(data), content_type='application/json')
 #     return HttpResponse(json.dumps(data), content_type='application/json') 
 
-#posts
+
 class PostList(APIView):
 
     def get(self, request):
